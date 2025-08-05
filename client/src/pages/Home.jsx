@@ -1,8 +1,8 @@
-import HeroSection from '../components/HeroSection';
-import Categories from '../components/Categories';
-import CrockerySample from '../components/CrockerySample';
-import ToysSample from '../components/ToysSample';
-import Newsletter from '../components/HomeCta';
+import HeroSection from '../homesection/HeroSection';
+import Categories from '../homesection/Categories';
+import CrockerySample from '../homesection/CrockerySample';
+import ToysSample from '../homesection/ToysSample';
+import Newsletter from '../homesection/HomeCta';
 
 export default function Home() {
   return (
