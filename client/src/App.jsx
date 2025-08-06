@@ -11,7 +11,8 @@ import ContactUs from './pages/ContactUs'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-
+import CrockeryDetails from "./crockerysection/CrockeryDetails";
+import ToyDetails from './toyssection/ToyDetails'
 export default function App() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -26,6 +27,8 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/crockery-details/:id" element={<CrockeryDetails />} />
+          <Route path="/toy-details/:id" element={<ToyDetails />} />
         </Routes>
       </main>
       <Footer />

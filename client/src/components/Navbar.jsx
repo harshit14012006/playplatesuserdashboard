@@ -35,13 +35,14 @@ export default function Navbar() {
       {/* Logo */}
       <Link
         to="/"
-        className="text-xl sm:text-2xl font-extrabold text-pink-600 tracking-wider hover:scale-105 transition-transform"
+        className="text-xl font-extrabold tracking-wider text-pink-600 transition-transform sm:text-2xl hover:scale-105"
       >
-        PlayPlates
+        Play
+        <span className='text-amber-800' >Plates</span>
       </Link>
 
       {/* Center Links (Desktop) */}
-      <div className="hidden md:flex space-x-10 text-sm font-medium mx-auto tracking-wide">
+      <div className="hidden mx-auto space-x-10 text-sm font-medium tracking-wide md:flex">
         {centerLinks.map((link) => (
           <motion.div
             key={link.name}
@@ -50,7 +51,7 @@ export default function Navbar() {
           >
             <Link
               to={link.path}
-              className="hover:text-pink-600 hover:underline underline-offset-4 transition-all duration-200"
+              className="transition-all duration-200 hover:text-pink-600 hover:underline underline-offset-4"
             >
               {link.name}
             </Link>
@@ -59,7 +60,7 @@ export default function Navbar() {
       </div>
 
       {/* Right Icons (Desktop) */}
-      <div className="hidden md:flex space-x-5 items-center">
+      <div className="items-center hidden space-x-5 md:flex">
         {rightIcons.map((link) => (
           <motion.div
             key={link.name}
@@ -68,7 +69,7 @@ export default function Navbar() {
           >
             <Link
               to={link.path}
-              className="text-xl hover:text-pink-600 transition-transform"
+              className="text-xl transition-transform hover:text-pink-600"
             >
               {link.icon}
             </Link>
@@ -108,7 +109,7 @@ export default function Navbar() {
                 <Link
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className="text-base font-medium tracking-wide text-gray-800 hover:text-pink-600 transition-all duration-200"
+                  className="text-base font-medium tracking-wide text-gray-800 transition-all duration-200 hover:text-pink-600"
                 >
                   {link.name}
                 </Link>
@@ -126,7 +127,7 @@ export default function Navbar() {
                   <Link
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl text-gray-700 hover:text-pink-600 transition-transform"
+                    className="text-2xl text-gray-700 transition-transform hover:text-pink-600"
                   >
                     {link.icon}
                   </Link>

@@ -37,11 +37,24 @@ const CrockeryFilter = ({ onFilterChange }) => {
             onChange={(e) => onFilterChange('category', e.target.value)}
             className="w-full px-4 py-2 text-sm transition border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">All Categories</option>
-            <option value="Glasses">Glasses</option>
+            <option value="">Select category</option>
+            <option value="Plates">Plates</option>
             <option value="Bowls">Bowls</option>
-            <option value="Bottle">Bottle</option>
-            <option value="Cup">Cup</option>
+            <option value="Cups">Cups</option>
+            <option value="Mugs">Mugs</option>
+            <option value="Glasses">Glasses</option>
+            <option value="Cutlery">Cutlery</option>
+            <option value="Serving Dishes">Serving Dishes</option>
+            <option value="Trays">Trays</option>
+            <option value="Jugs & Pitchers">Jugs & Pitchers</option>
+            <option value="Tea Sets">Tea Sets</option>
+            <option value="Dinner Sets">Dinner Sets</option>
+            <option value="Tureens">Tureens</option>
+            <option value="Condiment Sets">Condiment Sets</option>
+            <option value="Soup Bowls">Soup Bowls</option>
+            <option value="Side Plates">Side Plates</option>
+            <option value="Salad Bowls">Salad Bowls</option>
+            <option value="Saucers">Saucers</option>
           </select>
         </div>
 
@@ -52,10 +65,20 @@ const CrockeryFilter = ({ onFilterChange }) => {
             onChange={(e) => onFilterChange('material', e.target.value)}
             className="w-full px-4 py-2 text-sm transition border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">All Materials</option>
-            <option value="Steel">Steel</option>
+            <option value="">Select material</option>
+            <option value="Ceramic">Ceramic</option>
+            <option value="Porcelain">Porcelain</option>
+            <option value="Bone China">Bone China</option>
+            <option value="Melamine">Melamine</option>
             <option value="Glass">Glass</option>
-            <option value="Thermal Steel">Thermal Steel</option>
+            <option value="Tempered Glass">Tempered Glass</option>
+            <option value="Steel">Stainless Steel</option>
+            <option value="Plastic">Plastic</option>
+            <option value="Bamboo">Bamboo</option>
+            <option value="Wood">Wood</option>
+            <option value="Copper">Copper</option>
+            <option value="Clay/Terracotta">Clay / Terracotta</option>
+            <option value="Stoneware">Stoneware</option>
           </select>
         </div>
       </div>
