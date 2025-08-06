@@ -11,6 +11,13 @@ const socialVariants = {
   },
 };
 
+const paymentIcons = [
+  { src: 'https://img.icons8.com/color/48/visa.png', alt: 'Visa' },
+  { src: 'https://img.icons8.com/color/48/mastercard.png', alt: 'Mastercard' },
+  { src: 'https://img.icons8.com/color/48/paypal.png', alt: 'PayPal' },
+  { src: 'https://img.icons8.com/color/48/amex.png', alt: 'American Express' },
+];
+
 const Footer = () => {
   const [isQuickLinksOpen, setIsQuickLinksOpen] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
@@ -24,7 +31,7 @@ const Footer = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
       viewport={{ once: true }}
-      className="bg-[#ff4d4d] text-white py-10 px-4 sm:px-6 mt-10 rounded-t-3xl shadow-xl"
+      className="px-4 py-10 mt-10 text-white bg-pink-600 shadow-xl sm:px-6 rounded-t-3xl"
     >
       <div className="grid max-w-6xl grid-cols-1 gap-10 mx-auto sm:grid-cols-2 md:grid-cols-4">
         {/* About */}
@@ -35,7 +42,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Quick Links - Dropdown for mobile */}
+        {/* Quick Links */}
         <div>
           <h3 className="flex items-center justify-between mb-3 text-sm font-semibold md:block">
             Quick Links
@@ -44,14 +51,10 @@ const Footer = () => {
               onClick={() => setIsQuickLinksOpen(!isQuickLinksOpen)}
             >
               <ChevronDown
-                className={`ml-2 transform transition-transform ${
-                  isQuickLinksOpen ? 'rotate-180' : ''
-                }`}
+                className={`ml-2 transform transition-transform ${isQuickLinksOpen ? 'rotate-180' : ''}`}
               />
             </button>
           </h3>
-
-          {/* Desktop Static List */}
           <ul className="hidden space-y-2 text-sm md:block sm:text-base">
             {quickLinks.map((item) => (
               <li key={item}>
@@ -64,8 +67,6 @@ const Footer = () => {
               </li>
             ))}
           </ul>
-
-          {/* Mobile Dropdown List */}
           <AnimatePresence>
             {isQuickLinksOpen && (
               <motion.ul
@@ -89,7 +90,7 @@ const Footer = () => {
           </AnimatePresence>
         </div>
 
-        {/* Need Help Dropdown */}
+        {/* Help Links */}
         <div>
           <h3 className="flex items-center justify-between mb-3 text-sm font-semibold md:block">
             Need Help?
@@ -98,14 +99,10 @@ const Footer = () => {
               onClick={() => setIsHelpOpen(!isHelpOpen)}
             >
               <ChevronDown
-                className={`ml-2 transform transition-transform ${
-                  isHelpOpen ? 'rotate-180' : ''
-                }`}
+                className={`ml-2 transform transition-transform ${isHelpOpen ? 'rotate-180' : ''}`}
               />
             </button>
           </h3>
-
-          {/* Desktop Static List */}
           <ul className="hidden space-y-2 text-sm md:block sm:text-base">
             {helpLinks.map((item) => (
               <li key={item}>
@@ -118,8 +115,6 @@ const Footer = () => {
               </li>
             ))}
           </ul>
-
-          {/* Mobile Dropdown List */}
           <AnimatePresence>
             {isHelpOpen && (
               <motion.ul
@@ -143,7 +138,7 @@ const Footer = () => {
           </AnimatePresence>
         </div>
 
-        {/* Social Media */}
+        {/* Social */}
         <div>
           <h3 className="mb-3 text-sm font-semibold">Follow Us</h3>
           <div className="flex mt-2 space-x-4">
@@ -162,8 +157,20 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Payment Methods */}
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
+        {paymentIcons.map(({ src, alt }, idx) => (
+          <img
+            key={idx}
+            src={src}
+            alt={alt}
+            className="w-10 h-auto transition-transform duration-300 hover:scale-110"
+          />
+        ))}
+      </div>
+
       {/* Footer Bottom */}
-      <div className="mt-10 text-sm text-center sm:text-base text-white/90">
+      <div className="mt-6 text-sm text-center sm:text-base text-white/90">
         &copy; {new Date().getFullYear()} <span className="font-semibold">PlayPlates</span>. All rights reserved.
       </div>
     </motion.footer>
