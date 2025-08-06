@@ -26,21 +26,21 @@ const Footer = () => {
       viewport={{ once: true }}
       className="bg-[#ff4d4d] text-white py-10 px-4 sm:px-6 mt-10 rounded-t-3xl shadow-xl"
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="grid max-w-6xl grid-cols-1 gap-10 mx-auto sm:grid-cols-2 md:grid-cols-4">
         {/* About */}
         <div>
-          <h2 className="font-bold text-xl sm:text-2xl mb-3">PlayPlates</h2>
-          <p className="text-sm sm:text-base leading-relaxed">
+          <h2 className="mb-3 text-xl font-bold sm:text-2xl">PlayPlates</h2>
+          <p className="text-sm leading-relaxed sm:text-base">
             Explore a world of fun and elegance with our Toys & Crockery collection.
           </p>
         </div>
 
         {/* Quick Links - Dropdown for mobile */}
         <div>
-          <h3 className="font-semibold text-sm mb-3 flex items-center justify-between md:block">
+          <h3 className="flex items-center justify-between mb-3 text-sm font-semibold md:block">
             Quick Links
             <button
-              className="md:hidden text-white"
+              className="text-white md:hidden"
               onClick={() => setIsQuickLinksOpen(!isQuickLinksOpen)}
             >
               <ChevronDown
@@ -52,12 +52,12 @@ const Footer = () => {
           </h3>
 
           {/* Desktop Static List */}
-          <ul className="hidden md:block space-y-2 text-sm sm:text-base">
+          <ul className="hidden space-y-2 text-sm md:block sm:text-base">
             {quickLinks.map((item) => (
               <li key={item}>
                 <a
                   href={`/${item.toLowerCase()}`}
-                  className="hover:underline hover:tracking-wide transition-all duration-200"
+                  className="transition-all duration-200 hover:underline hover:tracking-wide"
                 >
                   {item}
                 </a>
@@ -72,13 +72,13 @@ const Footer = () => {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                className="md:hidden flex flex-col gap-2 text-sm sm:text-base mt-2"
+                className="flex flex-col gap-2 mt-2 text-sm md:hidden sm:text-base"
               >
                 {quickLinks.map((item) => (
                   <li key={item}>
                     <a
                       href={`/${item.toLowerCase()}`}
-                      className="hover:underline hover:tracking-wide transition-all duration-200"
+                      className="transition-all duration-200 hover:underline hover:tracking-wide"
                     >
                       {item}
                     </a>
@@ -91,10 +91,10 @@ const Footer = () => {
 
         {/* Need Help Dropdown */}
         <div>
-          <h3 className="font-semibold text-sm mb-3 flex items-center justify-between md:block">
+          <h3 className="flex items-center justify-between mb-3 text-sm font-semibold md:block">
             Need Help?
             <button
-              className="md:hidden text-white"
+              className="text-white md:hidden"
               onClick={() => setIsHelpOpen(!isHelpOpen)}
             >
               <ChevronDown
@@ -106,12 +106,12 @@ const Footer = () => {
           </h3>
 
           {/* Desktop Static List */}
-          <ul className="hidden md:block space-y-2 text-sm sm:text-base">
+          <ul className="hidden space-y-2 text-sm md:block sm:text-base">
             {helpLinks.map((item) => (
               <li key={item}>
                 <a
                   href={`/${item.toLowerCase().replace(/\s+/g, '')}`}
-                  className="hover:underline hover:tracking-wide transition-all duration-200"
+                  className="transition-all duration-200 hover:underline hover:tracking-wide"
                 >
                   {item}
                 </a>
@@ -126,13 +126,13 @@ const Footer = () => {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                className="md:hidden flex flex-col gap-2 text-sm sm:text-base mt-2"
+                className="flex flex-col gap-2 mt-2 text-sm md:hidden sm:text-base"
               >
                 {helpLinks.map((item) => (
                   <li key={item}>
                     <a
                       href={`/${item.toLowerCase().replace(/\s+/g, '')}`}
-                      className="hover:underline hover:tracking-wide transition-all duration-200"
+                      className="transition-all duration-200 hover:underline hover:tracking-wide"
                     >
                       {item}
                     </a>
@@ -145,15 +145,15 @@ const Footer = () => {
 
         {/* Social Media */}
         <div>
-          <h3 className="font-semibold text-sm mb-3">Follow Us</h3>
-          <div className="flex space-x-4 mt-2">
+          <h3 className="mb-3 text-sm font-semibold">Follow Us</h3>
+          <div className="flex mt-2 space-x-4">
             {[FaFacebookF, FaInstagram, FaTwitter].map((Icon, i) => (
               <motion.a
                 key={i}
                 href="#"
                 variants={socialVariants}
                 whileHover="hover"
-                className="text-white text-sm sm:text-xl hover:text-black transition"
+                className="text-sm text-white transition sm:text-xl hover:text-black"
               >
                 <Icon />
               </motion.a>
@@ -163,7 +163,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Bottom */}
-      <div className="text-center mt-10 text-sm sm:text-base text-white/90">
+      <div className="mt-10 text-sm text-center sm:text-base text-white/90">
         &copy; {new Date().getFullYear()} <span className="font-semibold">PlayPlates</span>. All rights reserved.
       </div>
     </motion.footer>
