@@ -7,18 +7,15 @@ import {
   HiEye, 
   HiStar, 
   HiSparkles,
-  HiTrendingUp,
-  HiShieldCheck,
   HiLightningBolt
 } from 'react-icons/hi';
-import { FaFilter, FaSearch, FaSort } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 
 export default function CrockerySample() {
   const navigate = useNavigate();
   const [hoveredItem, setHoveredItem] = useState(null);
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
-  const [viewMode, setViewMode] = useState('grid');
 
   // Professional color palette
   const professionalColors = {
@@ -46,7 +43,8 @@ export default function CrockerySample() {
       isBestSeller: true,
       features: ["Dishwasher Safe", "Microwave Safe", "Chip Resistant"],
       category: "dinnerware",
-      image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTn0wjJwBSiAemWthfihyJz5QEBt7vlmCgH1D4ha9kZ0NhVeVUVJPZl7DzKHcvUaAWL1lPZeHuuZPDS8m28zISZNcKiRCORPOPMYpEQlkhf",
+      image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn9GcTn0wjJwBSiAemWthfihyJz5QEBt7vlmCgH1D4ha9kZ0NhVeVUVJPZl7DzKHcvUaAWL1lPZeHuuZPDS8m28zISZNcKiRCORPOPMYpEQlkhf",
+      description: "Elevate your dining experience with this elegant plate set, crafted from fine bone ceramic for durability and style. Perfect for formal dinners or everyday use, these plates are dishwasher and microwave safe, offering both practicality and sophistication.",
       gradient: "from-amber-500 to-orange-600",
       bgGradient: "from-amber-50 to-orange-50"
     },
@@ -66,6 +64,7 @@ export default function CrockerySample() {
       features: ["Heat Retention", "Elegant Design", "Gift Ready"],
       category: "drinkware",
       image: "https://vigneto.in/cdn/shop/products/20220806_104542384_iOS-Copy.jpg?v=1659784744&width=823",
+      description: "Enjoy your tea in style with these vintage-inspired porcelain cups. Designed for excellent heat retention and a comfortable grip, this set is perfect for gifting or adding a touch of elegance to your tea time rituals.",
       gradient: "from-blue-500 to-indigo-600",
       bgGradient: "from-blue-50 to-indigo-50"
     },
@@ -85,6 +84,7 @@ export default function CrockerySample() {
       features: ["Scratch Resistant", "Easy Clean", "Versatile Use"],
       category: "serveware",
       image: "https://exclusivelane.com/cdn/shop/files/EL-005-2357_A_result_580x.webp?v=1752834070",
+      description: "These modern serving bowls, crafted from artisan stoneware, are perfect for any occasion. Their scratch-resistant finish and versatile design make them ideal for serving salads, pasta, or desserts with a contemporary flair.",
       gradient: "from-emerald-500 to-teal-600",
       bgGradient: "from-emerald-50 to-teal-50"
     },
@@ -104,6 +104,7 @@ export default function CrockerySample() {
       features: ["Premium Feel", "Perfect Grip", "Designer Look"],
       category: "drinkware",
       image: "https://www.versace.com/dw/image/v2/BGWN_PRD/on/demandware.static/-/Sites-ver-master-catalog/default/dwe3e51e5d/original/90_N29220-N403771_N1931_20_Medusa~Gala~Mug~2~Set-Coffee~~Tea-Versace-online-store_0_0.jpg?sw=850&q=85&strip=true",
+      description: "Indulge in luxury with this stylish mug set, made from fine bone china for a premium feel. With a designer look and perfect grip, these mugs are ideal for enjoying your morning coffee or evening tea in style.",
       gradient: "from-violet-500 to-purple-600",
       bgGradient: "from-violet-50 to-purple-50"
     }
@@ -158,8 +159,6 @@ export default function CrockerySample() {
       {/* Sophisticated Background Pattern */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(15,23,42,0.03)_1px,transparent_0)] bg-[length:24px_24px]" />
-        
-        {/* Floating elements */}
         <motion.div
           className="absolute rounded-full top-20 left-10 w-72 h-72 bg-gradient-to-r from-amber-500/8 to-orange-500/8 blur-3xl"
           animate={{
@@ -288,7 +287,7 @@ export default function CrockerySample() {
               }}
               onHoverStart={() => setHoveredItem(item.id)}
               onHoverEnd={() => setHoveredItem(null)}
-              onClick={() => navigate(`/crockery-details/${item.id}`, { state: { item } })}
+              onClick={() => navigate(`/crockery-details/${item.id}`, { state: { item: { ...item, imageUrl: item.image } } })}
               className="relative cursor-pointer group"
             >
               <div className={`bg-gradient-to-br ${item.bgGradient} backdrop-blur-xl border-2 ${
@@ -485,16 +484,6 @@ export default function CrockerySample() {
             </div>
           </div>
         </motion.div>
-      </div>
-
-      {/* View More Button */}
-      <div className="flex justify-center mt-10">
-        <Link
-          to="/crockery"
-          className="px-6 py-2 text-white transition-colors duration-300 rounded-full cursor-pointer bg-amber-800 hover:bg-amber-900"
-        >
-          View More
-        </Link>
       </div>
     </section>
   );

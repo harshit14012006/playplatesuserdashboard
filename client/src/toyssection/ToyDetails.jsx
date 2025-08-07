@@ -1,155 +1,306 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { ShoppingCart, Star } from "lucide-react";
 
 export default function ToyDetails() {
   const { state } = useLocation();
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("overview");
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   if (!state?.item) {
     return (
-      <div className="py-20 text-center text-gray-500">Product not found.</div>
+      <div className="py-20 text-center text-slate-500">
+        Product not found.
+      </div>
     );
   }
 
+  // Extract fields from state.item
   const {
     name,
     imageUrl,
-    image, // fallback for mock data
+    image,
     price,
     originalPrice,
     material,
     category,
     ageGroup,
     description,
+    rating,
+    reviews,
+    features,
+    discount,
+    inStock,
+    isNew,
+    isBestSeller,
+    safetyRating,
+    benefits,
+    gradient
   } = state.item;
 
   const imageSrc = imageUrl || image;
-  const shouldTruncate = description?.length > 200;
+
+  // Animation variants
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
 
   return (
-    <div
-      className="relative flex items-center justify-center min-h-screen px-4 pb-12 bg-center bg-no-repeat bg-cover pt-28"
+    <section
+      className="relative flex items-center justify-center min-h-screen px-4 py-32 bg-center bg-no-repeat bg-cover"
       style={{ backgroundImage: `url(${imageSrc})` }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70 backdrop-blur-xl" />
 
       {/* Card */}
-      <div className="relative z-10 w-full max-w-5xl p-6 text-white border shadow-2xl bg-white/10 backdrop-blur-2xl border-white/20 rounded-3xl sm:p-10">
-        <h1 className="mb-6 text-2xl font-bold text-center text-white sm:text-3xl">
-          {name}
-        </h1>
-
+      <motion.div
+        variants={cardVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 w-full max-w-5xl p-6 text-white border shadow-2xl bg-white/10 backdrop-blur-2xl border-white/20 rounded-3xl sm:p-10"
+      >
         <div className="flex flex-col gap-8 md:flex-row">
-          {/* Image */}
-          <div className="relative mx-auto md:mx-0">
-            <img
+          {/* Image and Badges */}
+          <div className="relative mx-auto md:mx-0 md:w-1/3">
+            <motion.img
               src={imageSrc}
               alt={name}
-              className="object-cover transition-transform duration-300 border border-white shadow-md w-44 h-44 md:w-52 md:h-52 rounded-xl hover:scale-105"
+              className="object-cover w-full h-64 transition-transform duration-300 border border-white shadow-xl md:h-80 rounded-2xl hover:scale-105"
+              whileHover={{ scale: 1.05 }}
             />
-            <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full shadow">
-              NEW
-            </span>
+            <div className="absolute flex flex-col gap-2 top-4 left-4">
+              {discount && (
+                <span className={`px-3 py-1 text-xs font-bold text-white rounded-full shadow-lg bg-gradient-to-r ${gradient}`}>
+                  {discount}
+                </span>
+              )}
+              {isNew && (
+                <span className="px-3 py-1 text-xs font-bold text-white rounded-full shadow-lg bg-emerald-500">
+                  NEW
+                </span>
+              )}
+              {isBestSeller && (
+                <span className="px-3 py-1 text-xs font-bold text-white bg-yellow-500 rounded-full shadow-lg">
+                  BESTSELLER
+                </span>
+              )}
+              {safetyRating && (
+                <span className={`px-3 py-1 text-xs font-bold text-white rounded-full shadow-lg ${
+                  safetyRating === 'A+' ? 'bg-green-500' : 'bg-blue-500'
+                }`}>
+                  Safety: {safetyRating}
+                </span>
+              )}
+            </div>
+            <div className="absolute flex items-center gap-2 px-3 py-1 rounded-lg bottom-2 left-2 bg-white/90 backdrop-blur-sm">
+              <div className={`w-2 h-2 rounded-full ${inStock ? 'bg-emerald-500' : 'bg-red-500'}`} />
+              <span className="text-xs font-medium text-slate-700">
+                {inStock ? 'In Stock' : 'Out of Stock'}
+              </span>
+            </div>
           </div>
 
-          {/* Tabs + Content */}
-          <div className="flex flex-col flex-1 gap-6 md:flex-row">
+          {/* Content */}
+          <div className="flex-1">
+            <h1 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+              {name}
+            </h1>
+            <p className="mb-4 text-lg font-medium text-white/80">
+              {state.item.subtitle}
+            </p>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-5 h-5 ${
+                      i < Math.floor(rating) 
+                        ? 'text-yellow-500 fill-yellow-500' 
+                        : 'text-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-sm font-semibold text-white">
+                {rating}
+              </span>
+              <span className="text-xs text-white/70">
+                ({reviews} reviews)
+              </span>
+            </div>
+
             {/* Tabs */}
-            <div className="space-y-2 md:w-1/4">
-              {["overview", "specs"].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium capitalize transition duration-200 ${
-                    activeTab === tab
-                      ? "bg-pink-600 text-white shadow"
-                      : "bg-white/20 text-white/80 hover:bg-white/30"
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
+            <div className="flex flex-col gap-6 md:flex-row">
+              <div className="space-y-2 md:w-1/4">
+                {["overview", "specs", "features", "benefits"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium capitalize transition duration-200 ${
+                      activeTab === tab
+                        ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow"
+                        : "bg-white/20 text-white/80 hover:bg-white/30"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
+              {/* Tab Content */}
+              <div className="space-y-4 text-sm md:w-3/4 text-white/90">
+                {activeTab === "overview" && (
+                  <>
+                    <h2 className="text-xl font-semibold text-white">
+                      Product Overview
+                    </h2>
+                    {description.length <= 200 ? (
+                      <p className="leading-relaxed">
+                        {description}
+                      </p>
+                    ) : (
+                      <>
+                        <p className="leading-relaxed">
+                          {showFullDescription
+                            ? description
+                            : `${description.slice(0, 200)}...`}
+                        </p>
+                        <button
+                          onClick={() => setShowFullDescription(!showFullDescription)}
+                          className="mt-2 text-sm font-medium text-pink-400 hover:underline focus:outline-none"
+                        >
+                          {showFullDescription ? "Show Less" : "Show More"}
+                        </button>
+                      </>
+                    )}
+                  </>
+                )}
+
+                {activeTab === "specs" && (
+                  <>
+                    <h2 className="text-xl font-semibold text-white">
+                      Specifications
+                    </h2>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      {material && (
+                        <li>
+                          <strong>Material:</strong> {material}
+                        </li>
+                      )}
+                      {category && (
+                        <li>
+                          <strong>Category:</strong> {category}
+                        </li>
+                      )}
+                      {ageGroup && (
+                        <li>
+                          <strong>Age Group:</strong> {ageGroup}
+                        </li>
+                      )}
+                      {safetyRating && (
+                        <li>
+                          <strong>Safety Rating:</strong> {safetyRating}
+                        </li>
+                      )}
+                      <li>
+                        <strong>Price:</strong> {price}
+                      </li>
+                      {originalPrice && (
+                        <li>
+                          <strong>Original Price:</strong> {originalPrice}
+                        </li>
+                      )}
+                      <li>
+                        <strong>Dimensions:</strong> 15cm x 15cm x 10cm
+                      </li>
+                      <li>
+                        <strong>Weight:</strong> 300g approx.
+                      </li>
+                    </ul>
+                  </>
+                )}
+
+                {activeTab === "features" && (
+                  <>
+                    <h2 className="text-xl font-semibold text-white">
+                      Features
+                    </h2>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      {features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+
+                {activeTab === "benefits" && (
+                  <>
+                    <h2 className="text-xl font-semibold text-white">
+                      Learning Benefits
+                    </h2>
+                    <ul className="ml-5 space-y-2 list-disc">
+                      {benefits.map((benefit, index) => (
+                        <li key={index}>{benefit}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
             </div>
 
-            {/* Tab Content */}
-            <div className="space-y-4 text-sm md:w-3/4 text-white/90">
-              {activeTab === "overview" && (
-                <>
-                  <h2 className="text-xl font-semibold text-white">
-                    Product Overview
-                  </h2>
-                  <p className="leading-relaxed">
-                    <strong>
-                      {shouldTruncate && !showFullDescription
-                        ? `${description?.slice(0, 200)}...`
-                        : description || "No description available."}
-                    </strong>
-                  </p>
-                  {shouldTruncate && (
-                    <button
-                      onClick={() =>
-                        setShowFullDescription(!showFullDescription)
-                      }
-                      className="mt-2 text-sm text-pink-300 underline transition hover:text-pink-100"
-                    >
-                      {showFullDescription ? "Show Less" : "Show More"}
-                    </button>
+            {/* Price and Add to Cart */}
+            <div className="flex items-center justify-between pt-6 md:pt-8">
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-bold text-white">
+                    {price}
+                  </span>
+                  {originalPrice && (
+                    <span className="text-sm line-through text-white/70">
+                      {originalPrice}
+                    </span>
                   )}
-                </>
-              )}
-
-              {activeTab === "specs" && (
-                <>
-                  <h2 className="text-xl font-semibold text-white">
-                    Specifications
-                  </h2>
-                  <ul className="ml-5 space-y-1 list-disc">
-                    {material && (
-                      <li>
-                        <strong>Material:</strong> {material}
-                      </li>
-                    )}
-                    {category && (
-                      <li>
-                        <strong>Category:</strong> {category}
-                      </li>
-                    )}
-                    {ageGroup && (
-                      <li>
-                        <strong>Age Group:</strong> {ageGroup}
-                      </li>
-                    )}
-                    <li>
-                      <strong>Price:</strong> ₹{price}
-                    </li>
-                    {originalPrice && (
-                      <li>
-                        <strong>Original Price:</strong> ₹{originalPrice}
-                      </li>
-                    )}
-                    <li>
-                      <strong>Dimensions:</strong> 15cm x 15cm x 10cm
-                    </li>
-                    <li>
-                      <strong>Weight:</strong> 300g approx.
-                    </li>
-                  </ul>
-                </>
-              )}
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 rounded-lg bg-white/20">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="px-3 py-1 text-white rounded-lg hover:bg-white/30"
+                  >
+                    -
+                  </button>
+                  <span className="text-sm font-medium text-white">
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="px-3 py-1 text-white rounded-lg hover:bg-white/30"
+                  >
+                    +
+                  </button>
+                </div>
+                <motion.button
+                  className={`flex items-center gap-2 bg-gradient-to-r ${gradient} text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    // Add to cart logic with quantity
+                  }}
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  Add to Cart
+                </motion.button>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Add to Cart */}
-        <div className="pt-6 text-center md:text-right">
-          <button className="bg-pink-600 text-white hover:bg-pink-500 font-semibold text-sm py-2.5 px-6 rounded-md shadow transition duration-200">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
+      </motion.div>
+    </section>
   );
 }

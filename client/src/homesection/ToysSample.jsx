@@ -7,19 +7,16 @@ import {
   HiEye, 
   HiStar, 
   HiSparkles,
-  HiTrendingUp,
-  HiShieldCheck,
-  HiLightningBolt,
-  HiGift
+  HiGift,
+  HiShieldCheck
 } from 'react-icons/hi';
-import { FaFilter, FaSearch, FaSort, FaBaby, FaChild } from 'react-icons/fa';
+import { FaSearch, FaBaby, FaChild } from 'react-icons/fa';
 
 export default function ToysSample() {
   const navigate = useNavigate();
   const [hoveredItem, setHoveredItem] = useState(null);
   const [selectedAgeGroup, setSelectedAgeGroup] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
-  const [showQuickView, setShowQuickView] = useState(null);
 
   // Professional color palette
   const professionalColors = {
@@ -50,6 +47,7 @@ export default function ToysSample() {
       category: "educational",
       safetyRating: "A+",
       image: "https://images-cdn.ubuy.co.in/65a201ee20727069ca69aa1c-battery-operated-train-set-wooden.jpg",
+      description: "Spark creativity with this beautifully crafted wooden train set, designed to enhance STEM learning. Made from premium hardwood with non-toxic paint, it’s perfect for children aged 3-8 to develop motor skills and problem-solving abilities.",
       gradient: "from-emerald-500 to-teal-600",
       bgGradient: "from-emerald-50 to-teal-50",
       benefits: ["Motor Skills", "Problem Solving", "Creativity"]
@@ -71,7 +69,8 @@ export default function ToysSample() {
       features: ["Hypoallergenic", "Machine Washable", "Super Soft"],
       category: "comfort",
       safetyRating: "A+",
-      image: "https://plus.unsplash.com/premium_photo-1664373233010-7c4abae40f78?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGVkZHklMjBiZWFyfGVufDB8fDB8fHww",
+      image: "https://plus.unsplash.com/premium_photo-1664373233010-7c4abae40f78?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGVkZHklMjBiZWFyfGVufDB8fDB8fHww",
+      description: "This plush teddy bear, made from organic cotton, is the perfect cuddle companion for infants and toddlers. Hypoallergenic and machine washable, it provides comfort and security for children aged 0-5 years.",
       gradient: "from-pink-500 to-rose-600",
       bgGradient: "from-pink-50 to-rose-50",
       benefits: ["Emotional Support", "Better Sleep", "Security"]
@@ -94,6 +93,7 @@ export default function ToysSample() {
       category: "building",
       safetyRating: "A",
       image: "https://www.kaarr.in/cdn/shop/files/rn-image_picker_lib_temp_0213f552-5c23-4507-8807-28cac364db96.jpg?v=1748787718",
+      description: "Unleash creativity with this building blocks set, featuring over 300 BPA-free plastic pieces. Ideal for children aged 4-12, it promotes spatial thinking and engineering skills with a convenient storage box.",
       gradient: "from-blue-500 to-indigo-600",
       bgGradient: "from-blue-50 to-indigo-50",
       benefits: ["Spatial Thinking", "Engineering Skills", "Patience"]
@@ -116,6 +116,7 @@ export default function ToysSample() {
       category: "electronic",
       safetyRating: "A",
       image: "https://m.media-amazon.com/images/I/5101j6bF+0L._SY300_SX300_.jpg",
+      description: "Experience thrilling races with this high-speed remote control car, made from durable ABS plastic. With a 2.4GHz remote and LED lights, it’s perfect for kids aged 6-14 to enhance hand-eye coordination.",
       gradient: "from-purple-500 to-violet-600",
       bgGradient: "from-purple-50 to-violet-50",
       benefits: ["Hand-Eye Coordination", "Focus", "Outdoor Play"]
@@ -153,7 +154,7 @@ export default function ToysSample() {
   }, [selectedAgeGroup, sortBy]);
 
   const handleCardClick = (item) => {
-    navigate(`/toy-details/${item.id}`, { state: { item } });
+    navigate(`/toy-details/${item.id}`, { state: { item: { ...item, imageUrl: item.image } } });
   };
 
   // Animation variants
@@ -285,7 +286,7 @@ export default function ToysSample() {
                 { value: 'infant', label: '0-2 Years', icon: FaBaby },
                 { value: 'toddler', label: '3-5 Years', icon: FaChild },
                 { value: 'child', label: '6-12 Years', icon: HiStar },
-                { value: 'teen', label: '13+ Years', icon: HiLightningBolt }
+                { value: 'teen', label: '13+ Years', icon: HiGift }
               ].map((filter) => (
                 <button
                   key={filter.value}
@@ -398,7 +399,7 @@ export default function ToysSample() {
                     whileHover={{ scale: 1.1 }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      setShowQuickView(item.id);
+                      // Quick view logic (can be implemented later)
                     }}
                   >
                     <HiEye className="text-slate-600" />
@@ -500,12 +501,7 @@ export default function ToysSample() {
                       whileTap={{ scale: 0.95 }}
                       onClick={(e) => {
                         e.stopPropagation();
-                        // Enhanced cart logic with animation
-                        const button = e.currentTarget;
-                        button.innerHTML = '✓ Added!';
-                        setTimeout(() => {
-                          button.innerHTML = '<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z"/></svg>Add to Cart';
-                        }, 2000);
+                        // Add to cart logic
                       }}
                     >
                       <ShoppingCart className="w-4 h-4" />
@@ -551,16 +547,6 @@ export default function ToysSample() {
             </div>
           </div>
         </motion.div>
-      </div>
-
-      {/* View More Button */}
-      <div className="flex justify-center mt-10">
-        <Link
-          to="/toys"
-          className="px-6 py-2 text-white transition-colors duration-300 bg-pink-600 rounded-full cursor-pointer hover:bg-pink-700"
-        >
-          View More
-        </Link>
       </div>
     </section>
   );
