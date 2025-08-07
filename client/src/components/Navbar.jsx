@@ -123,7 +123,7 @@ export default function Navbar() {
         role="navigation"
         aria-label="Main navigation"
       >
-        {/* Enhanced Logo with micro-interactions */}
+        {/* Enhanced Logo with micro-interactions - Resolved Version */}
         <Link
           to="/"
           className="flex items-center space-x-1 group relative"
