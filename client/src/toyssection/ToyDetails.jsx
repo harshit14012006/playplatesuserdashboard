@@ -5,6 +5,7 @@ export default function ToyDetails() {
   const { state } = useLocation();
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("overview");
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   if (!state?.item) {
     return (
@@ -12,23 +13,40 @@ export default function ToyDetails() {
     );
   }
 
-  const { name, image, material, price, originalPrice } = state.item;
+  const {
+    name,
+    imageUrl,
+    image, // fallback for mock data
+    price,
+    originalPrice,
+    material,
+    category,
+    ageGroup,
+    description,
+  } = state.item;
+
+  const imageSrc = imageUrl || image;
+  const shouldTruncate = description?.length > 200;
 
   return (
     <div
       className="relative flex items-center justify-center min-h-screen px-4 pb-12 bg-center bg-no-repeat bg-cover pt-28"
-      style={{ backgroundImage: `url(${image})` }}
+      style={{ backgroundImage: `url(${imageSrc})` }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black/70 via-black/50 to-black/70 backdrop-blur-sm" />
 
       {/* Card */}
       <div className="relative z-10 w-full max-w-5xl p-6 text-white border shadow-2xl bg-white/10 backdrop-blur-2xl border-white/20 rounded-3xl sm:p-10">
+        <h1 className="mb-6 text-2xl font-bold text-center text-white sm:text-3xl">
+          {name}
+        </h1>
+
         <div className="flex flex-col gap-8 md:flex-row">
           {/* Image */}
           <div className="relative mx-auto md:mx-0">
             <img
-              src={image}
+              src={imageSrc}
               alt={name}
               className="object-cover transition-transform duration-300 border border-white shadow-md w-44 h-44 md:w-52 md:h-52 rounded-xl hover:scale-105"
             />
@@ -60,25 +78,64 @@ export default function ToyDetails() {
             <div className="space-y-4 text-sm md:w-3/4 text-white/90">
               {activeTab === "overview" && (
                 <>
-                  <h2 className="text-xl font-semibold text-white">Product Overview</h2>
+                  <h2 className="text-xl font-semibold text-white">
+                    Product Overview
+                  </h2>
                   <p className="leading-relaxed">
-                    <strong>{name}</strong> is the perfect companion for your child’s playtime,
-                    combining fun, creativity, and safety. Whether it’s a soft toy or a remote-controlled car,
-                    each piece is designed to bring joy and learning to life.
+                    <strong>
+                      {shouldTruncate && !showFullDescription
+                        ? `${description?.slice(0, 200)}...`
+                        : description || "No description available."}
+                    </strong>
                   </p>
+                  {shouldTruncate && (
+                    <button
+                      onClick={() =>
+                        setShowFullDescription(!showFullDescription)
+                      }
+                      className="mt-2 text-sm text-pink-300 underline transition hover:text-pink-100"
+                    >
+                      {showFullDescription ? "Show Less" : "Show More"}
+                    </button>
+                  )}
                 </>
               )}
 
               {activeTab === "specs" && (
                 <>
-                  <h2 className="text-xl font-semibold text-white">Specifications</h2>
+                  <h2 className="text-xl font-semibold text-white">
+                    Specifications
+                  </h2>
                   <ul className="ml-5 space-y-1 list-disc">
-                    <li><strong>Material:</strong> {material}</li>
-                    <li><strong>Price:</strong> {price}</li>
-                    <li><strong>Original Price:</strong> {originalPrice}</li>
-                    <li><strong>Dimensions:</strong> 15cm x 15cm x 10cm</li>
-                    <li><strong>Weight:</strong> 300g approx.</li>
-                    <li><strong>Recommended Age:</strong> 3+ years</li>
+                    {material && (
+                      <li>
+                        <strong>Material:</strong> {material}
+                      </li>
+                    )}
+                    {category && (
+                      <li>
+                        <strong>Category:</strong> {category}
+                      </li>
+                    )}
+                    {ageGroup && (
+                      <li>
+                        <strong>Age Group:</strong> {ageGroup}
+                      </li>
+                    )}
+                    <li>
+                      <strong>Price:</strong> ₹{price}
+                    </li>
+                    {originalPrice && (
+                      <li>
+                        <strong>Original Price:</strong> ₹{originalPrice}
+                      </li>
+                    )}
+                    <li>
+                      <strong>Dimensions:</strong> 15cm x 15cm x 10cm
+                    </li>
+                    <li>
+                      <strong>Weight:</strong> 300g approx.
+                    </li>
                   </ul>
                 </>
               )}
@@ -88,7 +145,7 @@ export default function ToyDetails() {
 
         {/* Add to Cart */}
         <div className="pt-6 text-center md:text-right">
-          <button className="bg-pink-600 text-white hover:bg-pink-100 font-semibold text-sm py-2.5 px-6 rounded-md shadow transition duration-200">
+          <button className="bg-pink-600 text-white hover:bg-pink-500 font-semibold text-sm py-2.5 px-6 rounded-md shadow transition duration-200">
             Add to Cart
           </button>
         </div>

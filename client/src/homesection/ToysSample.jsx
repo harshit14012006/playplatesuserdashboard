@@ -1,47 +1,40 @@
+import { useEffect, useState } from "react";
 import { ShoppingCart } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function ToysSample() {
   const navigate = useNavigate();
+  const [toyItems, setToyItems] = useState([]);
 
-  const toyItems = [
-    {
-      id: "1",
-      name: "Wooden Train Set",
-      material: "Wood",
-      price: "₹999",
-      originalPrice: "₹1,299",
-      image:
-        "https://images-cdn.ubuy.co.in/65a201ee20727069ca69aa1c-battery-operated-train-set-wooden.jpg",
-    },
-    {
-      id: "2",
-      name: "Plush Teddy Bear",
-      material: "Cotton",
-      price: "₹349",
-      originalPrice: "₹499",
-      image:
-        "https://plus.unsplash.com/premium_photo-1664373233010-7c4abae40f78?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGVkZHklMjBiZWFyfGVufDB8fDB8fHww",
-    },
-    {
-      id: "3",
-      name: "Building Blocks Set",
-      material: "Plastic",
-      price: "₹749",
-      originalPrice: "₹999",
-      image:
-        "https://www.kaarr.in/cdn/shop/files/rn-image_picker_lib_temp_0213f552-5c23-4507-8807-28cac364db96.jpg?v=1748787718",
-    },
-    {
-      id: "4",
-      name: "Remote Control Car",
-      material: "ABS Plastic",
-      price: "₹1,499",
-      originalPrice: "₹1,999",
-      image:
-        "https://m.media-amazon.com/images/I/5101j6bF+0L._SY300_SX300_.jpg",
-    },
-  ];
+  useEffect(() => {
+    const fetchToys = async () => {
+      try {
+        const response = await axios.get(
+          "https://playplatesadmindashboardbackend.onrender.com/api/toys/get-all-toys"
+        );
+
+        const toys = response.data.map((item) => ({
+          id: item._id,
+          name: item.name,
+          price: `₹${item.price}`,
+          originalPrice: item.originalPrice ? `₹${item.originalPrice}` : null,
+          image: item.imageUrl,
+          material: item.material,
+          category: item.category,
+          ageGroup: item.ageGroup,
+          description: item.description,
+        }));
+
+        console.log("Fetched toys:", toys);
+        setToyItems(toys.slice(0, 4)); // show only 4
+      } catch (error) {
+        console.error("Error fetching toys:", error);
+      }
+    };
+
+    fetchToys();
+  }, []);
 
   const handleCardClick = (item) => {
     navigate(`/toy-details/${item.id}`, { state: { item } });
@@ -72,18 +65,16 @@ export default function ToysSample() {
 
             <div className="p-4 space-y-2">
               <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
-              <p className="text-sm text-gray-500">{item.material}</p>
 
               <div className="flex items-center justify-between mt-3">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-gray-800">{item.price}</span>
-                  <span className="text-sm text-gray-400 line-through">{item.originalPrice}</span>
-                </div>
+                <span className="text-sm font-bold text-gray-800">
+                  {item.price}
+                </span>
 
                 <button
                   className="flex items-center gap-1 bg-pink-600 hover:bg-pink-500 text-white text-xs px-3 py-1.5 rounded-md transition duration-200"
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent card click
+                    e.stopPropagation(); // prevent triggering navigation
                     alert("Added to cart!");
                   }}
                 >
@@ -94,6 +85,16 @@ export default function ToysSample() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* View More Button */}
+      <div className="flex justify-center mt-10">
+        <Link
+          to="/toys"
+          className="px-6 py-2 text-white transition-colors duration-300 bg-pink-600 rounded-full cursor-pointer hover:bg-pink-700"
+        >
+          View More
+        </Link>
       </div>
     </section>
   );
