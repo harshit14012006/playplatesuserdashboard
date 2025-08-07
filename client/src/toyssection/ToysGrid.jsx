@@ -3,21 +3,23 @@ import { ShoppingCart } from 'lucide-react';
 
 const ToysGrid = ({ toys }) => {
     return (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-3">
             {toys.map((toy) => (
                 <div
                     key={toy._id}
                     className="relative overflow-hidden transition-all duration-300 bg-white border border-pink-600 shadow-md rounded-2xl hover:shadow-xl group"
                 >
                     {/* Image */}
-                    <img
-                        src={toy.imageUrl}
-                        alt={toy.name}
-                        className="object-contain w-[282px] h-[282px] rounded-lg shadow"
-                    />
+                    <div className="w-full h-64 p-4">
+                        <img
+                            src={toy.imageUrl}
+                            alt={toy.name}
+                            className="object-contain w-full h-full rounded-lg shadow"
+                        />
+                    </div>
 
                     {/* Content */}
-                    <div className="p-4 space-y-2">
+                    <div className="px-4 pb-4 space-y-2">
                         <h2 className="text-lg font-semibold text-gray-900 line-clamp-1">{toy.name}</h2>
                         <p className="text-sm text-gray-500">{toy.category} — {toy.ageGroup}</p>
 

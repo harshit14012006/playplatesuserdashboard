@@ -14,7 +14,7 @@ export default function CrockeryDetails() {
     );
   }
 
-  const { name, image, material, price, originalPrice } = state.item;
+  const { name, image, material, price, originalPrice, description, category } = state.item;
 
   return (
     <div
@@ -64,9 +64,7 @@ export default function CrockeryDetails() {
                 <>
                   <h2 className="text-xl font-semibold text-white">Product Overview</h2>
                   <p className="leading-relaxed">
-                    <strong>{name}</strong> is crafted for elegance and practicality.
-                    Whether you're hosting guests or enjoying a family dinner, this piece
-                    adds a touch of luxury to every meal.
+                    <strong>{description}</strong>
                   </p>
                 </>
               )}
@@ -75,6 +73,7 @@ export default function CrockeryDetails() {
                 <>
                   <h2 className="text-xl font-semibold text-white">Specifications</h2>
                   <ul className="ml-5 space-y-1 list-disc">
+                    <li><strong>Category:</strong> {category}</li>
                     <li><strong>Material:</strong> {material}</li>
                     <li><strong>Price:</strong> {price}</li>
                     <li><strong>Original Price:</strong> {originalPrice}</li>

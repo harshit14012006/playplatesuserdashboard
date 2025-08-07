@@ -17,7 +17,7 @@ export default function Categories() {
       <div className="absolute right-0 z-0 rounded-full top-1/2 w-52 h-52 bg-purple-300/10 blur-2xl animate-ping" />
 
       {/* 👉 Heading */}
-      <h2 className="relative z-10 mb-16 text-4xl font-extrabold leading-tight text-center text-gray-800 sm:text-5xl drop-shadow-md">
+      <h2 className="relative z-10 mb-16 text-4xl font-extrabold leading-tight text-center text-gray-800 sm:text-4xl drop-shadow-md">
         Explore Our Categories
       </h2>
 
