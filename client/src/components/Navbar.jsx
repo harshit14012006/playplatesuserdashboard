@@ -34,12 +34,14 @@ export default function Navbar() {
     >
       {/* Logo */}
       <Link
-        to="/"
-        className="text-xl font-extrabold tracking-wider text-pink-600 transition-transform sm:text-2xl hover:scale-105"
-      >
-        Play
-        <span className='text-amber-800' >Plates</span>
-      </Link>
+  to="/"
+  className="text-xl font-extrabold tracking-wider transition-transform sm:text-2xl hover:scale-105"
+>
+  <span className="text-blue-600 transition hover:text-blue-700">Play</span>
+<span className="transition text-amber-700 hover:text-amber-800">Plates</span>
+
+</Link>
+
 
       {/* Center Links (Desktop) */}
       <div className="hidden mx-auto space-x-10 text-sm font-medium tracking-wide md:flex">
