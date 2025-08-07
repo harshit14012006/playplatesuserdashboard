@@ -36,10 +36,25 @@ export default function Navbar() {
     },
   ], []);
 
-  // Optimized toggle handler
-  const toggleMenu = useCallback(() => {
-    setIsOpen(prev => !prev);
-  }, []);
+const toggleMenu = useCallback(() => {
+  setIsOpen(prev => !prev);
+}, []);
+
+return (
+  <motion.nav
+    // ... main branch logo and nav code ...
+  >
+    {/* Logo */}
+    <Link
+      to="/"
+      className="text-xl font-extrabold tracking-wider transition-transform sm:text-2xl hover:scale-105"
+    >
+      <span className="text-blue-600 transition hover:text-blue-700">Play</span>
+      <span className="transition text-amber-700 hover:text-amber-800">Plates</span>
+    </Link>
+    {/* ... rest of your nav code ... */}
+  </motion.nav>
+);
 
   const closeMenu = useCallback(() => {
     setIsOpen(false);
