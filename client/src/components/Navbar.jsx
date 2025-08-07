@@ -17,7 +17,7 @@ export default function Navbar() {
     { name: 'About', path: '/about' },
     { name: 'Toys', path: '/toys' },
     { name: 'Crockery', path: '/crockery' },
-     { name: 'Contact Us', path: '/contact' },
+     { name: '', path: '/crockery' },
   ];
 
   const rightIcons = [
