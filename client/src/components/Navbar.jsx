@@ -51,7 +51,7 @@ export default function Navbar() {
           >
             <Link
               to={link.path}
-              className="transition-all duration-200 hover:text-pink-600 hover:underline underline-offset-4"
+              className="transition-all duration-200 hover:text-green-600 hover:underline underline-offset-4"
             >
               {link.name}
             </Link>
@@ -69,7 +69,7 @@ export default function Navbar() {
           >
             <Link
               to={link.path}
-              className="text-xl transition-transform hover:text-pink-600"
+              className="text-xl transition-transform hover:text-green-600"
             >
               {link.icon}
             </Link>
