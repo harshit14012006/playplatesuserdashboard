@@ -20,7 +20,6 @@ export default function Navbar() {
     { 
       name: 'Cart', 
       path: '/cart',
-      badge: '2',
       icon: 'M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 5M7 13l-1.5 5m0 0h9'
     },
     { 
@@ -36,25 +35,10 @@ export default function Navbar() {
     },
   ], []);
 
-const toggleMenu = useCallback(() => {
-  setIsOpen(prev => !prev);
-}, []);
-
-return (
-  <motion.nav
-    // ... main branch logo and nav code ...
-  >
-    {/* Logo */}
-    <Link
-      to="/"
-      className="text-xl font-extrabold tracking-wider transition-transform sm:text-2xl hover:scale-105"
-    >
-      <span className="text-blue-600 transition hover:text-blue-700">Play</span>
-      <span className="transition text-amber-700 hover:text-amber-800">Plates</span>
-    </Link>
-    {/* ... rest of your nav code ... */}
-  </motion.nav>
-);
+  // Optimized toggle handler
+  const toggleMenu = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
 
   const closeMenu = useCallback(() => {
     setIsOpen(false);
@@ -123,7 +107,7 @@ return (
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40 md:hidden"
+            className="fixed inset-0 z-40 bg-slate-900/20 backdrop-blur-sm md:hidden"
             onClick={closeMenu}
             aria-hidden="true"
           />
@@ -141,31 +125,31 @@ return (
         {/* Enhanced Logo with micro-interactions */}
         <Link
           to="/"
-          className="flex items-center space-x-1 group relative"
+          className="relative flex items-center space-x-1 group"
           aria-label="PlayPlates Home"
           onClick={closeMenu}
         >
           {/* Logo background glow effect */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-indigo-600/20 via-purple-600/20 to-indigo-600/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+          <div className="absolute transition-opacity duration-500 opacity-0 -inset-2 bg-gradient-to-r from-indigo-600/20 via-purple-600/20 to-indigo-600/20 rounded-xl blur group-hover:opacity-100 -z-10"></div>
           
           <motion.div 
             className="relative"
             whileHover={{ scale: prefersReducedMotion ? 1 : 1.02 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           >
-            <div className="text-2xl sm:text-3xl font-black tracking-tight bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800 bg-clip-text text-transparent group-hover:from-indigo-700 group-hover:via-purple-700 group-hover:to-indigo-900 transition-all duration-300">
+            <div className="text-2xl font-black tracking-tight text-transparent transition-all duration-300 sm:text-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800 bg-clip-text group-hover:from-indigo-700 group-hover:via-purple-700 group-hover:to-indigo-900">
               Play
             </div>
             {/* Subtle shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity duration-300"></div>
+            <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:opacity-100 group-hover:animate-shimmer"></div>
           </motion.div>
-          <span className="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text text-transparent group-hover:from-slate-700 group-hover:to-slate-900 transition-all duration-300">
+          <span className="text-xl font-black tracking-tight text-transparent transition-all duration-300 sm:text-2xl bg-gradient-to-r from-slate-600 to-slate-800 bg-clip-text group-hover:from-slate-700 group-hover:to-slate-900">
             Plates
           </span>
         </Link>
 
         {/* Enhanced Center Links (Desktop) */}
-        <div className="hidden mx-auto space-x-2 lg:space-x-4 text-sm font-semibold tracking-wide md:flex">
+        <div className="hidden mx-auto space-x-2 text-sm font-semibold tracking-wide lg:space-x-4 md:flex">
           {centerLinks.map((link, index) => {
             const isActive = isActiveLink(link.path);
             return (
@@ -244,7 +228,7 @@ return (
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow-lg"
+                      className="absolute flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full shadow-lg -top-2 -right-2"
                     >
                       {link.badge}
                     </motion.span>
@@ -265,7 +249,7 @@ return (
           <motion.button
             whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
             onClick={toggleMenu}
-            className="flex items-center justify-center w-11 h-11 text-slate-600 hover:text-slate-900 bg-slate-50/50 hover:bg-white/80 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:ring-offset-2"
+            className="flex items-center justify-center transition-all duration-300 w-11 h-11 text-slate-600 hover:text-slate-900 bg-slate-50/50 hover:bg-white/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:ring-offset-2"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -301,7 +285,7 @@ return (
               aria-orientation="vertical"
             >
               {/* Mobile Navigation Links */}
-              <div className="space-y-1 mb-6">
+              <div className="mb-6 space-y-1">
                 {centerLinks.map((link, i) => {
                   const isActive = isActiveLink(link.path);
                   return (
@@ -394,7 +378,7 @@ return (
                             <motion.span
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
-                              className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow-lg"
+                              className="absolute flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full shadow-lg -top-1 -right-1"
                             >
                               {link.badge}
                             </motion.span>
