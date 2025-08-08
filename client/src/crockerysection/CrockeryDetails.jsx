@@ -16,9 +16,17 @@ export default function CrockeryDetails() {
         return;
       }
 
+      const productData = {
+        productId: _id,
+        name,
+        imageUrl,
+        price,
+        quantity,
+      };
+
       const res = await axios.post(
         "http://localhost:8000/cart/add",
-        { productId: id },
+        productData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -27,17 +35,16 @@ export default function CrockeryDetails() {
       );
 
       alert("Item added to cart successfully");
+      navigate("/cart");
     } catch (error) {
       console.error("Error adding to cart:", error.response?.data || error.message);
       if (error.response && error.response.status === 401) {
         alert("Session expired. Please log in again.");
-        localStorage.removeItem("token"); // Purana token hata do
-        navigate("/login"); // Login page pe bhej do
+        localStorage.removeItem("token");
+        navigate("/login");
       }
     }
-  }
-
-
+  };
 
   const { state } = useLocation();
   const navigate = useNavigate();

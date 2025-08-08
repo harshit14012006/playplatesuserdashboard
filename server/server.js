@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
 import cartRoutes from "./routes/cartRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 import cors from 'cors';
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use("/cart", cartRoutes);
+app.use("/api/payment", paymentRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

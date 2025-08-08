@@ -1,6 +1,7 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
 import { ShoppingCart, Star, ArrowLeft } from "lucide-react";
 
 export default function ToyDetails() {
@@ -17,6 +18,44 @@ export default function ToyDetails() {
       <div className="py-20 text-center text-slate-500">Product not found.</div>
     );
   }
+
+  const addToCart = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login to add items to cart");
+        return;
+      }
+
+      const productData = {
+        productId: id,
+        name,
+        imageUrl: imageSrc,
+        price,
+        quantity,
+      };
+
+      const res = await axios.post(
+        "http://localhost:8000/cart/add",
+        productData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Item added to cart successfully");
+      navigate("/cart");
+    } catch (error) {
+      console.error("Error adding to cart:", error.response?.data || error.message);
+      if (error.response && error.response.status === 401) {
+        alert("Session expired. Please log in again.");
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    }
+  };
 
   const {
     name,
@@ -100,9 +139,8 @@ export default function ToyDetails() {
                 </span>
               )}
               {safetyRating && (
-                <span className={`px-3 py-1 text-xs font-bold text-white rounded-full shadow-lg ${
-                  safetyRating === 'A+' ? 'bg-green-500' : 'bg-blue-500'
-                }`}>
+                <span className={`px-3 py-1 text-xs font-bold text-white rounded-full shadow-lg ${safetyRating === 'A+' ? 'bg-green-500' : 'bg-blue-500'
+                  }`}>
                   Safety: {safetyRating}
                 </span>
               )}
@@ -129,9 +167,8 @@ export default function ToyDetails() {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-5 h-5 ${
-                    i < Math.floor(rating) ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'
-                  }`}
+                  className={`w-5 h-5 ${i < Math.floor(rating) ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'
+                    }`}
                 />
               ))}
               <span className="text-sm font-semibold">{rating}</span>
@@ -146,11 +183,10 @@ export default function ToyDetails() {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium capitalize transition duration-200 ${
-                      activeTab === tab
-                        ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow"
-                        : "bg-white/20 text-white/80 hover:bg-white/30"
-                    }`}
+                    className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium capitalize transition duration-200 ${activeTab === tab
+                      ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow"
+                      : "bg-white/20 text-white/80 hover:bg-white/30"
+                      }`}
                   >
                     {tab}
                   </button>
@@ -249,9 +285,7 @@ export default function ToyDetails() {
                   className={`flex items-center gap-2 bg-gradient-to-r ${gradient} text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    // Add to cart logic
-                  }}
+                  onClick={addToCart}
                 >
                   <ShoppingCart className="w-5 h-5" />
                   Add to Cart
