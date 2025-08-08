@@ -1,11 +1,45 @@
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { ShoppingCart, Star, ArrowLeft } from "lucide-react";
 
 export default function CrockeryDetails() {
+
+  const { id } = useParams(); // yaha se product ka id aa jayega
+
+  const addToCart = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Please login to add items to cart");
+        return;
+      }
+
+      const res = await axios.post(
+        "http://localhost:8000/cart/add",
+        { productId: id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Item added to cart successfully");
+    } catch (error) {
+      console.error("Error adding to cart:", error.response?.data || error.message);
+      if (error.response && error.response.status === 401) {
+        alert("Session expired. Please log in again.");
+        localStorage.removeItem("token"); // Purana token hata do
+        navigate("/login"); // Login page pe bhej do
+      }
+    }
+  }
+
+
+
   const { state } = useLocation();
-  const { id } = useParams();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("overview");
@@ -21,6 +55,7 @@ export default function CrockeryDetails() {
   }
 
   const {
+    _id,
     name,
     imageUrl,
     material,
@@ -118,9 +153,8 @@ export default function CrockeryDetails() {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-5 h-5 ${
-                    i < Math.floor(rating) ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'
-                  }`}
+                  className={`w-5 h-5 ${i < Math.floor(rating) ? 'text-yellow-500 fill-yellow-500' : 'text-gray-300'
+                    }`}
                 />
               ))}
               <span className="text-sm font-semibold">{rating}</span>
@@ -135,11 +169,10 @@ export default function CrockeryDetails() {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium capitalize transition duration-200 ${
-                      activeTab === tab
-                        ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow"
-                        : "bg-white/20 text-white/80 hover:bg-white/30"
-                    }`}
+                    className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium capitalize transition duration-200 ${activeTab === tab
+                      ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow"
+                      : "bg-white/20 text-white/80 hover:bg-white/30"
+                      }`}
                   >
                     {tab}
                   </button>
@@ -225,9 +258,7 @@ export default function CrockeryDetails() {
                   className={`flex items-center gap-2 bg-gradient-to-r ${gradient} text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-lg hover:shadow-xl transition-all`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    // Add to cart logic
-                  }}
+                  onClick={addToCart}
                 >
                   <ShoppingCart className="w-5 h-5" />
                   Add to Cart

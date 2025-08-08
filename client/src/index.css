@@ -125,3 +125,11 @@ p, a, span, li, input, textarea, button {
 .animate-slideDown {
   animation: slideDown 0.3s ease-out;
 }
+
+@keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+          animation: shimmer 0.8s ease-in-out;
+        }
