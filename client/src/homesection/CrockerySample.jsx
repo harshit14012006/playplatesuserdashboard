@@ -1,3 +1,4 @@
+// CrockerySample.jsx
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart } from "lucide-react";
@@ -155,51 +156,51 @@ export default function CrockerySample() {
   };
 
   return (
-    <section className="relative px-6 py-32 overflow-hidden bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/30">
+    <section className="relative px-4 py-16 overflow-hidden sm:px-6 lg:px-8 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50/30">
       {/* Sophisticated Background Pattern */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(15,23,42,0.03)_1px,transparent_0)] bg-[length:24px_24px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(15,23,42,0.03)_1px,transparent_0)] bg-[length:16px_16px] sm:bg-[length:20px_20px] lg:bg-[length:24px_24px]" />
         <motion.div
-          className="absolute rounded-full top-20 left-10 w-72 h-72 bg-gradient-to-r from-amber-500/8 to-orange-500/8 blur-3xl"
+          className="absolute w-48 h-48 rounded-full top-10 sm:top-20 left-5 sm:left-10 sm:w-64 sm:h-64 lg:w-72 lg:h-72 bg-gradient-to-r from-amber-500/10 to-orange-500/10 blur-2xl sm:blur-3xl"
           animate={{
-            x: [0, 60, 0],
-            y: [0, -40, 0],
-            scale: [1, 1.1, 1],
+            x: [0, 40, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.05, 1],
           }}
           transition={{ duration: 20, repeat: Infinity }}
         />
         <motion.div
-          className="absolute rounded-full bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-blue-500/8 to-purple-500/8 blur-3xl"
+          className="absolute w-56 h-56 rounded-full bottom-10 sm:bottom-20 right-5 sm:right-10 sm:w-72 sm:h-72 lg:w-80 lg:h-80 bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-2xl sm:blur-3xl"
           animate={{
-            x: [0, -50, 0],
-            y: [0, 30, 0],
-            scale: [1.1, 1, 1.1],
+            x: [0, -40, 0],
+            y: [0, 20, 0],
+            scale: [1.05, 1, 1.05],
           }}
           transition={{ duration: 25, repeat: Infinity }}
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-8xl">
+      <div className="relative z-10 mx-auto max-w-7xl">
         {/* Professional Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-16 text-center"
+          className="mb-10 text-center sm:mb-12 lg:mb-16"
         >
           <motion.div 
-            className="inline-flex items-center gap-3 mb-6"
+            className="inline-flex items-center gap-2 mb-4 sm:gap-3 sm:mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <div className="flex items-center justify-center w-12 h-12 shadow-xl bg-gradient-to-r from-slate-800 to-slate-600 rounded-2xl">
-              <HiSparkles className="text-2xl text-white" />
+            <div className="flex items-center justify-center w-10 h-10 shadow-xl sm:w-12 sm:h-12 bg-gradient-to-r from-slate-800 to-slate-600 rounded-xl sm:rounded-2xl">
+              <HiSparkles className="text-xl text-white sm:text-2xl" />
             </div>
-            <div className="w-16 h-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500" />
+            <div className="w-12 h-1 rounded-full sm:w-16 bg-gradient-to-r from-amber-500 to-orange-500" />
           </motion.div>
           
           <motion.h2
-            className="mb-6 text-5xl font-black leading-tight lg:text-6xl text-slate-800"
+            className="mb-4 text-3xl font-black leading-tight sm:mb-6 sm:text-4xl lg:text-5xl text-slate-800"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -211,7 +212,7 @@ export default function CrockerySample() {
           </motion.h2>
           
           <motion.p
-            className="max-w-3xl mx-auto mb-8 text-xl font-light leading-relaxed text-slate-600"
+            className="max-w-xl mx-auto mb-6 text-base font-light leading-relaxed sm:max-w-2xl lg:max-w-3xl sm:mb-8 sm:text-lg lg:text-xl text-slate-600"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -221,13 +222,13 @@ export default function CrockerySample() {
 
           {/* Enhanced Controls */}
           <motion.div
-            className="flex flex-col items-center justify-center gap-6 lg:flex-row"
+            className="flex flex-col items-center justify-center gap-4 sm:gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
             {/* Filter Tabs */}
-            <div className="flex items-center gap-2 p-2 border shadow-lg bg-white/80 backdrop-blur-xl rounded-2xl border-slate-200/50">
+            <div className="flex flex-wrap justify-center gap-2 p-2 border shadow-lg bg-white/80 backdrop-blur-xl rounded-xl sm:rounded-2xl border-slate-200/50">
               {[
                 { value: 'all', label: 'All Items' },
                 { value: 'dinnerware', label: 'Dinnerware' },
@@ -237,7 +238,7 @@ export default function CrockerySample() {
                 <button
                   key={filter.value}
                   onClick={() => setSelectedFilter(filter.value)}
-                  className={`px-4 py-2 rounded-xl font-semibold text-sm transition-all ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl font-semibold text-xs sm:text-sm transition-all ${
                     selectedFilter === filter.value
                       ? 'bg-slate-800 text-white shadow-md'
                       : 'text-slate-600 hover:text-slate-800'
@@ -249,11 +250,11 @@ export default function CrockerySample() {
             </div>
 
             {/* Sort & Search */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 text-sm font-medium border bg-white/80 backdrop-blur-xl border-slate-200/50 rounded-xl text-slate-700 focus:ring-2 focus:ring-blue-500"
+                className="px-3 py-2 text-xs font-medium border rounded-lg sm:px-4 sm:py-2 sm:text-sm bg-white/80 backdrop-blur-xl border-slate-200/50 sm:rounded-xl text-slate-700 focus:ring-2 focus:ring-blue-500"
               >
                 <option value="featured">Featured</option>
                 <option value="price-low">Price: Low to High</option>
@@ -262,8 +263,8 @@ export default function CrockerySample() {
                 <option value="newest">Newest First</option>
               </select>
               
-              <button className="p-3 transition-all border shadow-md bg-white/80 backdrop-blur-xl border-slate-200/50 text-slate-600 rounded-xl hover:shadow-lg">
-                <FaSearch className="text-sm" />
+              <button className="p-2 transition-all border rounded-lg shadow-md sm:p-3 bg-white/80 backdrop-blur-xl border-slate-200/50 text-slate-600 sm:rounded-xl hover:shadow-lg">
+                <FaSearch className="text-xs sm:text-sm" />
               </button>
             </div>
           </motion.div>
@@ -274,15 +275,15 @@ export default function CrockerySample() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4"
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-8"
         >
           {filteredAndSortedItems.map((item, index) => (
             <motion.div
               key={item.id}
               variants={cardVariants}
               whileHover={{ 
-                y: -12, 
-                scale: 1.03,
+                y: -8, 
+                scale: 1.02,
                 transition: { type: "spring", stiffness: 300 }
               }}
               onHoverStart={() => setHoveredItem(item.id)}
@@ -294,16 +295,16 @@ export default function CrockerySample() {
                 hoveredItem === item.id 
                   ? 'border-slate-300' 
                   : 'border-white/40'
-              } rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 relative`}>
+              } rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl hover:shadow-2xl sm:hover:shadow-3xl transition-all duration-500 relative`}>
                 
                 {/* Premium Background Elements */}
                 <div className="absolute inset-0 bg-white/50 backdrop-blur-sm" />
-                <div className="absolute top-0 right-0 w-32 h-32 translate-x-16 -translate-y-16 rounded-full bg-gradient-to-bl from-white/30 to-transparent" />
+                <div className="absolute top-0 right-0 w-24 h-24 translate-x-12 -translate-y-12 rounded-full sm:w-32 sm:h-32 sm:translate-x-16 sm:-translate-y-16 bg-gradient-to-bl from-white/30 to-transparent" />
                 
                 {/* Badges */}
-                <div className="absolute z-20 flex flex-col gap-2 top-4 left-4">
+                <div className="absolute z-20 flex flex-col gap-1.5 sm:gap-2 top-3 sm:top-4 left-3 sm:left-4">
                   <motion.div
-                    className={`px-3 py-1 text-xs font-bold text-white shadow-lg rounded-full bg-gradient-to-r ${item.gradient}`}
+                    className={`px-2 sm:px-3 py-1 text-xs font-bold text-white shadow-md sm:shadow-lg rounded-lg sm:rounded-full bg-gradient-to-r ${item.gradient}`}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 + index * 0.1 }}
@@ -311,58 +312,58 @@ export default function CrockerySample() {
                     {item.discount}
                   </motion.div>
                   {item.isNew && (
-                    <span className="px-3 py-1 text-xs font-bold text-white rounded-full shadow-lg bg-emerald-500">
+                    <span className="px-2 py-1 text-xs font-bold text-white rounded-lg shadow-md sm:px-3 sm:rounded-full sm:shadow-lg bg-emerald-500">
                       NEW
                     </span>
                   )}
                   {item.isBestSeller && (
-                    <span className="px-3 py-1 text-xs font-bold text-white bg-yellow-500 rounded-full shadow-lg">
+                    <span className="px-2 py-1 text-xs font-bold text-white bg-yellow-500 rounded-lg shadow-md sm:px-3 sm:rounded-full sm:shadow-lg">
                       BESTSELLER
                     </span>
                   )}
                 </div>
 
                 {/* Floating Action Buttons */}
-                <div className="absolute z-20 flex flex-col gap-2 top-4 right-4">
+                <div className="absolute z-20 flex flex-col gap-1.5 sm:gap-2 top-3 sm:top-4 right-3 sm:right-4">
                   <motion.button
-                    className="flex items-center justify-center w-10 h-10 transition-all border rounded-full shadow-lg opacity-0 bg-white/90 backdrop-blur-sm border-white/40 group-hover:opacity-100"
+                    className="flex items-center justify-center w-8 h-8 transition-all border rounded-full shadow-md opacity-0 sm:w-10 sm:h-10 sm:shadow-lg bg-white/90 backdrop-blur-sm border-white/40 group-hover:opacity-100"
                     whileHover={{ scale: 1.1 }}
                     onClick={(e) => {
                       e.stopPropagation();
                       // Add to wishlist logic
                     }}
                   >
-                    <HiHeart className="text-slate-600" />
+                    <HiHeart className="text-sm text-slate-600 sm:text-base" />
                   </motion.button>
                   <motion.button
-                    className="flex items-center justify-center w-10 h-10 transition-all border rounded-full shadow-lg opacity-0 bg-white/90 backdrop-blur-sm border-white/40 group-hover:opacity-100"
+                    className="flex items-center justify-center w-8 h-8 transition-all border rounded-full shadow-md opacity-0 sm:w-10 sm:h-10 sm:shadow-lg bg-white/90 backdrop-blur-sm border-white/40 group-hover:opacity-100"
                     whileHover={{ scale: 1.1 }}
                     onClick={(e) => {
                       e.stopPropagation();
                       // Quick view logic
                     }}
                   >
-                    <HiEye className="text-slate-600" />
+                    <HiEye className="text-sm text-slate-600 sm:text-base" />
                   </motion.button>
                 </div>
 
                 {/* Product Image */}
-                <div className="relative z-10 p-6 pb-0">
+                <div className="relative z-10 p-4 pb-0 sm:p-6">
                   <motion.div
-                    className="relative mb-4"
-                    whileHover={{ scale: 1.05 }}
+                    className="relative mb-3 sm:mb-4"
+                    whileHover={{ scale: 1.03 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} rounded-2xl blur-2xl opacity-20 scale-110`} />
+                    <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} rounded-xl sm:rounded-2xl blur-xl sm:blur-2xl opacity-20 scale-105 sm:scale-110`} />
                     <img 
                       src={item.image} 
                       alt={item.name}
-                      className="relative z-10 object-cover w-full h-48 shadow-xl rounded-2xl"
+                      className="relative z-10 object-contain w-full h-40 shadow-md sm:h-48 lg:h-56 sm:shadow-xl rounded-xl sm:rounded-2xl"
                     />
                     
                     {/* Stock Status */}
-                    <div className="absolute flex items-center gap-2 px-3 py-1 rounded-lg bottom-2 left-2 bg-white/90 backdrop-blur-sm">
-                      <div className={`w-2 h-2 rounded-full ${item.inStock ? 'bg-emerald-500' : 'bg-red-500'}`} />
+                    <div className="absolute flex items-center gap-1 px-2 py-1 rounded-lg sm:gap-2 sm:px-3 bottom-2 left-2 bg-white/90 backdrop-blur-sm">
+                      <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${item.inStock ? 'bg-emerald-500' : 'bg-red-500'}`} />
                       <span className="text-xs font-medium text-slate-700">
                         {item.inStock ? 'In Stock' : 'Out of Stock'}
                       </span>
@@ -371,14 +372,14 @@ export default function CrockerySample() {
                 </div>
 
                 {/* Product Details */}
-                <div className="relative z-10 p-6 pt-2">
+                <div className="relative z-10 p-4 pt-2 sm:p-6">
                   {/* Rating & Reviews */}
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 mb-2 sm:gap-2 sm:mb-3">
+                    <div className="flex items-center gap-0.5 sm:gap-1">
                       {[...Array(5)].map((_, i) => (
                         <HiStar
                           key={i}
-                          className={`w-4 h-4 ${
+                          className={`w-3 h-3 sm:w-4 sm:h-4 ${
                             i < Math.floor(item.rating) 
                               ? 'text-yellow-500' 
                               : 'text-gray-300'
@@ -386,7 +387,7 @@ export default function CrockerySample() {
                         />
                       ))}
                     </div>
-                    <span className="text-sm font-semibold text-slate-700">
+                    <span className="text-xs font-semibold sm:text-sm text-slate-700">
                       {item.rating}
                     </span>
                     <span className="text-xs text-slate-500">
@@ -395,23 +396,23 @@ export default function CrockerySample() {
                   </div>
 
                   {/* Product Name & Subtitle */}
-                  <h3 className="mb-1 text-xl font-bold transition-colors text-slate-800 group-hover:text-slate-900">
+                  <h3 className="mb-1 text-lg font-bold transition-colors sm:text-xl text-slate-800 group-hover:text-slate-900">
                     {item.name}
                   </h3>
-                  <p className="mb-2 text-sm font-medium text-slate-600">
+                  <p className="mb-1 text-xs font-medium sm:mb-2 sm:text-sm text-slate-600">
                     {item.subtitle}
                   </p>
-                  <p className="mb-4 text-sm text-slate-500">
+                  <p className="mb-3 text-xs sm:mb-4 text-slate-500">
                     {item.material}
                   </p>
 
                   {/* Features */}
-                  <div className="mb-4">
-                    <div className="flex flex-wrap gap-1">
+                  <div className="mb-3 sm:mb-4">
+                    <div className="flex flex-wrap gap-1 sm:gap-1.5">
                       {item.features.slice(0, 2).map((feature, featureIndex) => (
                         <span
                           key={featureIndex}
-                          className="px-2 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-700"
+                          className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs font-medium rounded sm:rounded-full bg-slate-100 text-slate-700"
                         >
                           {feature}
                         </span>
@@ -422,18 +423,18 @@ export default function CrockerySample() {
                   {/* Price & Add to Cart */}
                   <div className="flex items-center justify-between">
                     <div className="flex flex-col">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl font-black text-slate-800">
+                      <div className="flex items-center gap-1 sm:gap-2">
+                        <span className="text-lg font-black sm:text-xl text-slate-800">
                           {item.price}
                         </span>
-                        <span className="text-sm line-through text-slate-400">
+                        <span className="text-xs line-through sm:text-sm text-slate-400">
                           {item.originalPrice}
                         </span>
                       </div>
                     </div>
 
                     <motion.button
-                      className={`flex items-center gap-2 bg-gradient-to-r ${item.gradient} text-white text-sm font-bold px-4 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all`}
+                      className={`flex items-center gap-1 sm:gap-2 bg-gradient-to-r ${item.gradient} text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg hover:shadow-lg sm:hover:shadow-xl transition-all`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={(e) => {
@@ -441,15 +442,15 @@ export default function CrockerySample() {
                         // Add to cart logic
                       }}
                     >
-                      <ShoppingCart className="w-4 h-4" />
-                      Add to Cart
+                      <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4" />
+                      Add
                     </motion.button>
                   </div>
                 </div>
 
                 {/* Hover Overlay Effect */}
                 <motion.div
-                  className={`absolute inset-0 bg-gradient-to-t ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-3xl`}
+                  className={`absolute inset-0 bg-gradient-to-t ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl sm:rounded-3xl`}
                   initial={false}
                 />
               </div>
@@ -459,26 +460,26 @@ export default function CrockerySample() {
 
         {/* Call to Action */}
         <motion.div
-          className="mt-20 text-center"
+          className="mt-12 text-center sm:mt-16 lg:mt-20"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
         >
-          <div className="max-w-2xl p-8 mx-auto border shadow-2xl bg-white/80 backdrop-blur-xl rounded-3xl border-white/20">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <HiLightningBolt className="text-3xl text-amber-500" />
-              <h3 className="text-2xl font-bold text-slate-800">
+          <div className="max-w-xl p-6 mx-auto border shadow-xl sm:max-w-2xl sm:p-8 sm:shadow-2xl bg-white/80 backdrop-blur-xl rounded-2xl sm:rounded-3xl border-white/20">
+            <div className="flex items-center justify-center gap-2 mb-3 sm:gap-3 sm:mb-4">
+              <HiLightningBolt className="text-2xl sm:text-3xl text-amber-500" />
+              <h3 className="text-xl font-bold sm:text-2xl text-slate-800">
                 Can't find what you're looking for?
               </h3>
             </div>
-            <p className="mb-6 text-slate-600">
+            <p className="mb-4 text-sm sm:mb-6 sm:text-base text-slate-600">
               Explore our complete collection or get personalized recommendations
             </p>
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <button className="px-8 py-4 font-bold text-white transition-all shadow-xl bg-gradient-to-r from-slate-800 to-slate-700 rounded-2xl hover:shadow-2xl hover:scale-105">
+            <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+              <button className="px-6 py-3 font-bold text-white transition-all shadow-md sm:px-8 sm:py-4 sm:shadow-xl bg-gradient-to-r from-slate-800 to-slate-700 rounded-xl sm:rounded-2xl hover:shadow-lg sm:hover:shadow-2xl hover:scale-105">
                 View All Products
               </button>
-              <button className="px-8 py-4 font-bold transition-all bg-white border-2 shadow-lg border-slate-200 text-slate-800 rounded-2xl hover:shadow-xl hover:scale-105">
+              <button className="px-6 py-3 font-bold transition-all bg-white border-2 shadow-md sm:px-8 sm:py-4 sm:shadow-lg border-slate-200 text-slate-800 rounded-xl sm:rounded-2xl hover:shadow-lg sm:hover:shadow-xl hover:scale-105">
                 Get Recommendations
               </button>
             </div>
