@@ -16,7 +16,7 @@ const Cart = () => {
   const fetchCart = useCallback(async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get("http://localhost:8000/cart", {
+      const res = await axios.get("https://playplatesuserdashboard.onrender.com/cart", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCartItems(res.data.cart?.items || []);
@@ -41,7 +41,7 @@ const Cart = () => {
 
       try {
         await axios.patch(
-          `http://localhost:8000/cart/update`,
+          `https://playplatesuserdashboard.onrender.com/cart/update`,
           { productId, quantity: newQuantity },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -58,7 +58,7 @@ const Cart = () => {
     async (productId) => {
       setIsRemoving(productId);
       try {
-        await axios.delete(`http://localhost:8000/cart/remove/${productId}`, {
+        await axios.delete(`https://playplatesuserdashboard.onrender.com/cart/remove/${productId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         fetchCart();
@@ -76,7 +76,7 @@ const Cart = () => {
   const clearCart = useCallback(async () => {
     if (!window.confirm("Are you sure you want to clear your cart?")) return;
     try {
-      await axios.delete("http://localhost:8000/cart/clear", {
+      await axios.delete("https://playplatesuserdashboard.onrender.com/cart/clear", {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCart();
@@ -105,7 +105,7 @@ const Cart = () => {
 
   const handlePayment = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/api/payment/create-order", {
+      const res = await axios.post("https://playplatesuserdashboard.onrender.com/api/payment/create-order", {
         amount: total, // backend expects amount in rupees
       });
 

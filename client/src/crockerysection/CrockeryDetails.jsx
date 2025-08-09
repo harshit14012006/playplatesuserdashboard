@@ -25,7 +25,7 @@ export default function CrockeryDetails() {
       };
 
       const res = await axios.post(
-        "http://localhost:8000/cart/add",
+        "https://playplatesuserdashboard.onrender.com/cart/add",
         productData,
         {
           headers: {

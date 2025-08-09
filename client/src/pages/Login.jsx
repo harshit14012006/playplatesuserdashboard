@@ -52,7 +52,7 @@ export default function Login() {
     if (!validateForm()) return;
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/api/auth/login', formData);
+      const response = await axios.post('https://playplatesuserdashboard.onrender.com/api/auth/login', formData);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/');
