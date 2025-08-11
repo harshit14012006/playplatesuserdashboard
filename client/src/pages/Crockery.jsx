@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import axios from 'axios';
 import CrockeryGrid from '../crockerysection/CrockeryGrid';
 import CrockerySlider from '../crockerysection/CrockerySlider';
@@ -13,6 +13,7 @@ export default function Crockery() {
   const [sortOrder, setSortOrder] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+    const shopSectionRef = useRef(null);
 
   // Fetch from API
   useEffect(() => {
@@ -63,10 +64,10 @@ export default function Crockery() {
   }
 
   return (
-    <section className="min-h-screen px-6 pt-32 pb-16">
-      <CrockerySlider />
+    <section className="min-h-screen px-6  pb-16">
+      <CrockerySlider onShopClick={() => shopSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}/>
 
-      <h1 className="mt-8 mb-4 text-4xl font-bold">Crockery Collection</h1>
+      <h1 className="mt-8 mb-4 text-4xl font-bold" ref={shopSectionRef}>Crockery Collection</h1>
       <p className="max-w-2xl mb-4 text-gray-700">
         Explore premium kitchenware including glasses, bowls, bottles and more.
       </p>
