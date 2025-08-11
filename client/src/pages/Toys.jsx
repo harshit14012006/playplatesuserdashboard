@@ -61,7 +61,7 @@ export default function Toys() {
   }
 
   return (
-    <section className="min-h-screen px-6 pt-32">
+    <section className="min-h-screen px-6 ">
       <ToysSlider />
 
       <h1 className="mt-8 mb-4 text-4xl font-bold">Toys Collection</h1>
