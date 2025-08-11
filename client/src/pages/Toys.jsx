@@ -65,7 +65,7 @@ export default function Toys() {
     <section className="min-h-screen px-6 ">
       <ToysSlider onShopClick={() => shopSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}/>
 
-      <h1 className="mt-8 mb-4 text-4xl font-bold">Toys Collection</h1>
+      <h1 className="mt-8 mb-4 text-4xl font-bold" ref={shopSectionRef}>Toys Collection</h1>
       <p className="max-w-2xl mb-4 text-gray-700">
         Explore a variety of fun, safe, and educational toys for all age groups.
       </p>
