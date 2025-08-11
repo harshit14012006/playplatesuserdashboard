@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import axios from 'axios';
 import ToysGrid from '../toyssection/ToysGrid';
 import ToysSlider from '../toyssection/ToysSlider';
@@ -13,6 +13,7 @@ export default function Toys() {
   const [sortOrder, setSortOrder] = useState('');
   const [loading, setLoading] = useState(true);
 
+    const shopSectionRef = useRef(null);
   // 🔁 Fetch toys from backend
   useEffect(() => {
     const fetchToys = async () => {
@@ -62,7 +63,7 @@ export default function Toys() {
 
   return (
     <section className="min-h-screen px-6 ">
-      <ToysSlider />
+      <ToysSlider onShopClick={() => shopSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}/>
 
       <h1 className="mt-8 mb-4 text-4xl font-bold">Toys Collection</h1>
       <p className="max-w-2xl mb-4 text-gray-700">
