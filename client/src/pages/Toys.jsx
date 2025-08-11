@@ -69,7 +69,7 @@ export default function Toys() {
         Explore a variety of fun, safe, and educational toys for all age groups.
       </p>
 
-      <ToysSearchBar onSearch={handleSearch} />
+      <ToysSearchBar onSearch={handleSearch}    id="shop-section"/>
       <ToysSort onSortChange={handleSortChange} />
 
       <div className="flex flex-col gap-6 mt-4 lg:flex-row">

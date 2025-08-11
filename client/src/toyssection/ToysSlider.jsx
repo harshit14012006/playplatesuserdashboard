@@ -81,10 +81,7 @@ const ToysHeroSection = () => {
                 />
               </motion.button>
 
-              <button className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium py-3 px-6 rounded-lg border border-gray-200 hover:border-blue-300 bg-white transition-all">
-                <FiPlayCircle className="text-blue-500" />
-                Watch Demo
-              </button>
+             
             </motion.div>
 
             {/* Small floating toys at bottom of text section */}
