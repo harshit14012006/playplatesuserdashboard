@@ -12,11 +12,7 @@ const ToysHeroSection = ({ onShopClick }) => {
     { emoji: '🎮', color: 'bg-purple-400', size: 'w-14 h-14', x: '30%', y: '70%' },
     { emoji: '🏎️', color: 'bg-red-400', size: 'w-18 h-18', x: '70%', y: '10%' }
   ];
-  const handleClick = () => {
-    document.getElementById("shop-section")?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
+ 
   return (
     <section className="relative bg-white overflow-hidden mt-0 pt-0">
       {/* Colorful abstract shapes in background */}
