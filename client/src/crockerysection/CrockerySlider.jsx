@@ -82,14 +82,7 @@ const CrockeryHeroSection = ({ onShopClick }) => {
                 />
               </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium py-3 px-6 rounded-lg border border-gray-200 hover:border-blue-300 bg-white transition-all"
-              >
-                <FiSearch className="text-blue-500" />
-                Browse Sets
-              </motion.button>
+             
             </motion.div>
 
             {/* Small floating crockery icons */}
