@@ -13,6 +13,7 @@ export default function Crockery() {
   const [sortOrder, setSortOrder] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+    const shopSectionRef = useRef(null);
 
   // Fetch from API
   useEffect(() => {
