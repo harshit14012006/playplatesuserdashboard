@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiShoppingCart, FiPlayCircle } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
-const ToysHeroSection = () => {
+const ToysHeroSection = ({ onShopClick }) => {
   const [hovered, setHovered] = useState(false);
 
   // Colorful toy elements data
@@ -64,7 +64,7 @@ const ToysHeroSection = () => {
               className="flex flex-col sm:flex-row gap-4"
             >
               <motion.button
-                onClick={handleClick}
+                onClick={onShopClick}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onHoverStart={() => setHovered(true)}
