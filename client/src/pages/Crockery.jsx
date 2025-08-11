@@ -65,7 +65,7 @@ export default function Crockery() {
 
   return (
     <section className="min-h-screen px-6  pb-16">
-      <CrockerySlider />
+      <CrockerySlider onShopClick={() => shopSectionRef.current?.scrollIntoView({ behavior: 'smooth' })}/>
 
       <h1 className="mt-8 mb-4 text-4xl font-bold">Crockery Collection</h1>
       <p className="max-w-2xl mb-4 text-gray-700">
